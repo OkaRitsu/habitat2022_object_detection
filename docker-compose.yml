@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  habitat:
+    build: .
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - './:/workspace'
+    # ports:
+    #   - "8888:8888"
+    shm_size: '2gb'
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    # command: jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
